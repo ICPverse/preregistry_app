@@ -11,3 +11,8 @@ async function get_plug_principal() {
   const principalId = await window.ic.plug.agent.getPrincipal();
   console.log(principalId);
 }
+
+async function get_balance() {
+  const result = await window.ic.plug.requestBalance();
+  console.log(result);
+}
