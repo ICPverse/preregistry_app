@@ -24,7 +24,7 @@ get_balance_button.addEventListener("click", () => get_balance());
 const get_nft_button = document.getElementById("get_nft_button_stoic");
 get_nft_button.addEventListener("click", () => get_nft());
 
-async function connect_stoic() {
+export async function connect_stoic() {
   try {
     // identity is set on the window object
     window.identity = await StoicIdentity.connect();
@@ -34,11 +34,11 @@ async function connect_stoic() {
   }
 }
 
-function get_principal() {
+export function get_principal() {
   console.log(window.identity.getPrincipal().toString());
 }
 
-async function get_balance() {
+export async function get_balance() {
   const ledger = LedgerCanister.create();
   const principal = window.identity.getPrincipal();
   const accountIdentifier = AccountIdentifier.fromPrincipal({ principal });
@@ -46,12 +46,12 @@ async function get_balance() {
   console.log(balance);
 }
 
-async function get_nft() {
+export async function get_nft() {
   try {
     // ERC721 standard
     const actor = Actor.createActor(ghost_factory, {
       agent: new HttpAgent({
-        host: "",
+        host: "https://mainnet.ic0.app/",
         identity: window.identity,
       }),
       canisterId: ghost_canister,
@@ -61,9 +61,9 @@ async function get_nft() {
     const accountIdentifier = AccountIdentifier.fromPrincipal({ principal });
     const result = await actor.tokens_ext(accountIdentifier.toHex());
     console.log(result);
-    if ("ok" in result) {
-      console.log(result.ok[0][0]);
-    }
+    // if ("ok" in result) {
+    //   console.log(result.ok[0][0]);
+    // }
   } catch (error) {
     console.log(error);
   }

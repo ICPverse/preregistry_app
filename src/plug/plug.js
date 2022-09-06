@@ -23,7 +23,7 @@ get_balance_button.addEventListener("click", () => get_balance());
 const get_nft_button = document.getElementById("get_nft_button_plug");
 get_nft_button.addEventListener("click", () => get_nft());
 
-async function connect_plug() {
+export async function connect_plug() {
   try {
     const publicKey = await window.ic.plug.requestConnect({
       whitelist,
@@ -34,17 +34,17 @@ async function connect_plug() {
   }
 }
 
-function get_principal() {
+export function get_principal() {
   const principalId = window.ic.plug.agent.getPrincipal();
   console.log(principalId);
 }
 
-async function get_balance() {
+export async function get_balance() {
   const result = await window.ic.plug.requestBalance();
   console.log(result);
 }
 
-async function get_nft() {
+export async function get_nft() {
   // ERC721 standard
   const actor = await window.ic.plug.createActor({
     canisterId: ghost_canister,
