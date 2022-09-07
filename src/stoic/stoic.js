@@ -28,14 +28,16 @@ export async function connect_stoic() {
   try {
     // identity is set on the window object
     window.identity = await StoicIdentity.connect();
-    console.log(window.identity);
+    console.log("stoic connected");
   } catch (error) {
     console.log(error);
   }
 }
 
 export function get_principal() {
-  console.log(window.identity.getPrincipal().toString());
+  let principal = window.identity.getPrincipal();
+  console.log(principal.toString());
+  return principal.toString();
 }
 
 export async function get_balance() {
@@ -44,6 +46,7 @@ export async function get_balance() {
   const accountIdentifier = AccountIdentifier.fromPrincipal({ principal });
   const balance = await ledger.accountBalance({ accountIdentifier });
   console.log(balance);
+  return balance;
 }
 
 export async function get_nft() {
@@ -60,10 +63,13 @@ export async function get_nft() {
     const principal = window.identity.getPrincipal();
     const accountIdentifier = AccountIdentifier.fromPrincipal({ principal });
     const result = await actor.tokens_ext(accountIdentifier.toHex());
-    console.log(result);
-    // if ("ok" in result) {
-    //   console.log(result.ok[0][0]);
-    // }
+    if ("ok" in result) {
+      console.log(result.ok);
+      return result.ok;
+    }
+    if ("err" in result) {
+      console.log("Something went wrong");
+    }
   } catch (error) {
     console.log(error);
   }

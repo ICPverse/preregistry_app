@@ -25,23 +25,25 @@ get_nft_button.addEventListener("click", () => get_nft());
 
 export async function connect_plug() {
   try {
-    const publicKey = await window.ic.plug.requestConnect({
+    await window.ic.plug.requestConnect({
       whitelist,
     });
-    console.log(publicKey);
+    console.log("plug connected");
   } catch (e) {
     console.log(e);
   }
 }
 
-export function get_principal() {
-  const principalId = window.ic.plug.agent.getPrincipal();
-  console.log(principalId);
+export async function get_principal() {
+  const principal = await window.ic.plug.agent.getPrincipal();
+  console.log(principal.toString());
+  return principal.toString();
 }
 
 export async function get_balance() {
-  const result = await window.ic.plug.requestBalance();
-  console.log(result);
+  const balance = await window.ic.plug.requestBalance();
+  console.log(balance);
+  return balance;
 }
 
 export async function get_nft() {
@@ -53,6 +55,10 @@ export async function get_nft() {
 
   const result = await actor.tokens_ext(window.ic.plug.accountId);
   if ("ok" in result) {
-    console.log(result.ok[0][0]);
+    console.log(result.ok);
+    return result.ok;
+  }
+  if ("err" in result) {
+    console.log("Something went wrong");
   }
 }
