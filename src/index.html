@@ -14,10 +14,9 @@
           email: email,
           userName: userName,
           fav: fav,
+          walletID: localStorage.getItem("walletID"),
         })
       );
-
-      localStorage.setItem("email", email);
     } catch (err) {
       console.log("err", JSON.stringify(err));
     }

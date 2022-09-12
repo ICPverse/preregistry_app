@@ -37,24 +37,6 @@ async function get_principal() {
   var x = await getValues();
   console.log(x);
 
-  const email = localStorage.getItem("email");
-  if (email) {
-    let url = "http://localhost:5000/api/setID";
-    try {
-      var xhr = new XMLHttpRequest();
-      xhr.open("PATCH", url, true);
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.send(
-        JSON.stringify({
-          email: email,
-          walletID: principalId,
-        })
-      );
-
-      localStorage.setItem("email", email);
-    } catch (err) {
-      console.log("err", JSON.stringify(err));
-    }
-  }
+  localStorage.setItem("walletID", principalId);
 }
 window.get_principal = get_principal;
