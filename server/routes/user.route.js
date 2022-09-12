@@ -5,7 +5,7 @@ const router = express.Router();
 const { setWalletID, setDetails } = require('../controllers/user.controller');
 const { requireSignin } = require('../controllers/auth.controller');
 
-router.patch('/setID', requireSignin, setWalletID);
-router.put('/setdetails', requireSignin, setDetails);
+router.patch('/setID', setWalletID);
+router.put('/setdetails', setDetails);
 
 module.exports = router;

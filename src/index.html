@@ -1,19 +1,23 @@
 <script>
   function validateForm() {
-    //todo handle validation
     let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
-    let url = "http://localhost:5000/api/register";
+    let userName = document.getElementById("password").value;
+    let fav = document.getElementById("nft").value;
+
+    let url = "http://localhost:5000/api/setdetails";
     try {
       var xhr = new XMLHttpRequest();
-      xhr.open("POST", url, true);
+      xhr.open("PUT", url, true);
       xhr.setRequestHeader("Content-Type", "application/json");
       xhr.send(
         JSON.stringify({
           email: email,
-          password: password,
+          userName: userName,
+          fav: fav,
         })
       );
+
+      localStorage.setItem("email", email);
     } catch (err) {
       console.log("err", JSON.stringify(err));
     }
@@ -25,10 +29,10 @@
   <form name="myForm" method="post">
     <div>Email:</div>
     <input type="email" id="email" />
-    <div>Password:</div>
-    <input type="password" id="password" />
-    <div>Confirm password:</div>
-    <input type="password" id="confirm" />
+    <div>NickName:</div>
+    <input type="text" id="password" />
+    <div>Favorite NFT Collection:</div>
+    <input type="text" id="nft" />
     <button type="button" text="lg" onclick="validateForm()">Submit</button>
   </form>
 </body>
