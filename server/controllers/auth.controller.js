@@ -17,8 +17,8 @@ const transporter = nodemailer.createTransport({
 });
 
 exports.registerController = (req, res) => {
-  const { name, email, password } = req.body;
-  if (!name || !email || !password) {
+  const { email, password } = req.body;
+  if (!email || !password) {
     return res.status(400).json({
       message: 'All the fields are required',
     });
@@ -61,7 +61,6 @@ exports.registerController = (req, res) => {
     //   return res.json({ message: `Email has been send to ${email}` });
     // });
     const user1 = new User({
-      name,
       email,
       password,
     });
@@ -94,10 +93,9 @@ exports.activationController = (req, res) => {
           errors: 'Expired link. Signup again',
         });
       }
-      const { name, email, password } = jwt.decode(token);
+      const { userName, email, password } = jwt.decode(token);
 
       const user = new User({
-        name,
         email,
         password,
       });
@@ -137,7 +135,6 @@ exports.activationController = (req, res) => {
         token: newToken,
         user: {
           _id,
-          name,
           email,
           role,
         },
@@ -190,7 +187,6 @@ exports.loginController = (req, res) => {
       token,
       user: {
         _id,
-        name,
         email,
       },
     });
