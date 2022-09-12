@@ -17,26 +17,6 @@ async function connect_infinity() {
   try {
     const publicKey = await window.ic.infinityWallet.requestConnect();
     console.log(`The connected user's public key is:`, publicKey);
-
-    const email = localStorage.getItem("email");
-    if (email) {
-      let url = "http://localhost:5000/api/setID";
-      try {
-        var xhr = new XMLHttpRequest();
-        xhr.open("PATCH", url, true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.send(
-          JSON.stringify({
-            email: email,
-            walletID: publicKey,
-          })
-        );
-
-        localStorage.setItem("email", email);
-      } catch (err) {
-        console.log("err", JSON.stringify(err));
-      }
-    }
   } catch (e) {
     console.log(e);
   }
@@ -56,5 +36,25 @@ async function get_principal() {
   console.log(`InfinityWallet's user principal Id is ${principalId}`);
   var x = await getValues();
   console.log(x);
+
+  const email = localStorage.getItem("email");
+  if (email) {
+    let url = "http://localhost:5000/api/setID";
+    try {
+      var xhr = new XMLHttpRequest();
+      xhr.open("PATCH", url, true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.send(
+        JSON.stringify({
+          email: email,
+          walletID: principalId,
+        })
+      );
+
+      localStorage.setItem("email", email);
+    } catch (err) {
+      console.log("err", JSON.stringify(err));
+    }
+  }
 }
 window.get_principal = get_principal;
