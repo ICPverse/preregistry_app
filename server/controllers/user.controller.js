@@ -26,12 +26,12 @@ exports.setWalletID = async (req, res) => {
 
 exports.setDetails = async (req, res) => {
   try {
-    const { fav, userName, email } = req.body;
+    const { fav, userName, email, walletID } = req.body;
     if (!email) {
       throw 'Email is required';
     }
 
-    const user = new User({ fav, userName, email });
+    const user = new User({ fav, userName, email, walletID });
     await user.save();
 
     return res.json({ message: 'details set' });
