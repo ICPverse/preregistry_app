@@ -1,4 +1,5 @@
 import template from "./infinity.html";
+import {getValues} from "../fields/fields";
 
 const infinity_buttons = document.createElement("div");
 infinity_buttons.innerHTML = template;
@@ -37,6 +38,8 @@ async function get_principal(){
   const principalId = await window.ic.infinityWallet.getPrincipal();
 
   console.log(`InfinityWallet's user principal Id is ${principalId}`);
+  var x = await getValues();
+  console.log(x);
 
 }
 window.get_principal = get_principal;

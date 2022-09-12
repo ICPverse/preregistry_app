@@ -36150,10 +36150,24 @@ async function infinity_get_principal(){
   const principalId = await window.ic.infinityWallet.getPrincipal();
 
   console.log(`InfinityWallet's user principal Id is ${principalId}`);
+  var x = document.getElementById("uname").value;
+  console.log(x);
 
 }
 window.get_principal = infinity_get_principal;
+;// CONCATENATED MODULE: ./src/fields/fields.html
+// Module
+var fields_code = "<!DOCTYPE html> <html> <head> </head> <body> <h1>FIELDS</h1> <form> <label for=\"uname\">Nickname:</label><br> <input type=\"text\" id=\"uname\" name=\"uname\"><br> <label for=\"cname\">Favorite NFT Collection:</label><br> <input type=\"text\" id=\"cname\" name=\"cname\"> </form> </body> </html>";
+// Exports
+/* harmony default export */ const fields = (fields_code);
+;// CONCATENATED MODULE: ./src/fields/fields.js
+
+
+const field_buttons = document.createElement("div");
+field_buttons.innerHTML = fields;
+document.body.appendChild(field_buttons);
 ;// CONCATENATED MODULE: ./src/index.js
+
 
 
 
