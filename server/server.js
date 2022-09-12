@@ -12,9 +12,9 @@ require('dotenv').config({
 connectDB();
 
 app.use(express.json());
+app.use(cors());
 
 // cors to allow to deal with frontend locally
-app.use(cors());
 if (process.env.NODE_ENV === 'development') {
   // morgan is used for logging
   app.use(morgan('dev'));

@@ -13,7 +13,6 @@ const userSchema = new mongoose.Schema(
     userName: {
       type: String,
       trim: true,
-      required: true,
     },
     isArtist: Boolean,
     preferences: [String],

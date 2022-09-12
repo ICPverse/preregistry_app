@@ -18,6 +18,7 @@ const transporter = nodemailer.createTransport({
 
 exports.registerController = (req, res) => {
   const { email, password } = req.body;
+
   if (!email || !password) {
     return res.status(400).json({
       message: 'All the fields are required',
@@ -68,9 +69,9 @@ exports.registerController = (req, res) => {
     user1.save((error) => {
       if (error) {
         // eslint-disable-next-line no-console
-        console.log('Save error' + error, errorHandler(error));
+        console.log('Save error' + error);
         return res.status(401).json({
-          errors: errorHandler(error),
+          errors: error,
         });
       }
       return res.json({ message: 'registerd' });

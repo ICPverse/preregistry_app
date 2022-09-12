@@ -23,3 +23,20 @@ exports.setWalletID = async (req, res) => {
     });
   }
 };
+
+exports.setDetails = async (req, res) => {
+  try {
+    const { preferences, isArtist } = req.body;
+
+    await User.updateOne(
+      { _id: req.user._id },
+      { $set: { preferences, isArtist } }
+    );
+    return res.json({ message: 'details set' });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({
+      errors: err,
+    });
+  }
+};
