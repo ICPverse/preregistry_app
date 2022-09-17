@@ -1,16 +1,37 @@
-<!DOCTYPE html>
-<html>
-  <head> </head>
-  <body>
-    <h1>FIELDS</h1>
-    <form>
-      <label for="uname">Nickname:</label><br />
-      <input type="text" id="uname" name="uname" /><br />
-      <label for="mname">Email:</label><br />
-      <input type="text" id="mname" name="mname" /><br />
-      <label for="cname">Favorite NFT Collection:</label><br />
-      <input type="text" id="cname" name="cname" />
-      <input type="submit" />
-    </form>
-  </body>
-</html>
+<script>
+  function validateForm() {
+    let email = document.getElementById("email").value;
+    let userName = document.getElementById("password").value;
+    let fav = document.getElementById("nft").value;
+
+    let url = "http://localhost:5000/api/setdetails";
+    try {
+      var xhr = new XMLHttpRequest();
+      xhr.open("PUT", url, true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.send(
+        JSON.stringify({
+          email: email,
+          userName: userName,
+          fav: fav,
+          walletID: localStorage.getItem("walletID"),
+        })
+      );
+      alert("request sent");
+    } catch (err) {
+      console.log("err", JSON.stringify(err));
+    }
+    console.log("req");
+  }
+</script>
+<body>
+  <form name="myForm" method="post">
+    <div>Email:</div>
+    <input type="email" id="email" />
+    <div>NickName:</div>
+    <input type="text" id="password" />
+    <div>Favorite NFT Collection:</div>
+    <input type="text" id="nft" />
+    <button type="button" text="lg" onclick="validateForm()">Submit</button>
+  </form>
+</body>

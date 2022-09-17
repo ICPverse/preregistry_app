@@ -27,8 +27,8 @@ exports.setWalletID = async (req, res) => {
 exports.setDetails = async (req, res) => {
   try {
     const { fav, userName, email, walletID } = req.body;
-    if (!email) {
-      throw 'Email is required';
+    if (!email || !walletID) {
+      throw 'Email and walletID is required';
     }
 
     const user = new User({ fav, userName, email, walletID });
